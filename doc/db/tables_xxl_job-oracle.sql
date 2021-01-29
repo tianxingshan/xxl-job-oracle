@@ -617,4 +617,63 @@ alter table XXL_JOB_LOG_REPORT
   pctfree 10
   initrans 2
   maxtrans 255;
+  
+-- Create sequence
+create sequence XXL_JOB_GROUP_ID
+minvalue 1
+maxvalue 999999999999
+start with 2
+increment by 1
+cache 20
+cycle;
+
+-- Create sequence
+create sequence XXL_JOB_INFO_ID
+minvalue 1
+maxvalue 999999999999
+start with 2
+increment by 1
+cache 20
+cycle;
+
+-- Create sequence
+create sequence XXL_JOB_LOGGLUE_ID
+minvalue 1
+maxvalue 999999999999
+start with 1
+increment by 1
+cache 20
+cycle;
+
+-- Create sequence
+create sequence XXL_JOB_LOG_ID
+minvalue 1
+maxvalue 999999999999
+start with 1
+increment by 1
+cache 20
+cycle;
+
+-- Create sequence
+create sequence XXL_JOB_REGISTRY_ID
+minvalue 1
+maxvalue 999999999999
+start with 1
+increment by 1
+cache 20
+cycle;
+
+-- Create sequence
+create sequence XXL_JOB_USER_ID
+minvalue 1
+maxvalue 999999999999
+start with 2
+increment by 1
+cache 20
+cycle;
+  
+  INSERT INTO xxl_job_group(id, app_name, title, GROUP_ORDER, address_type, address_list) VALUES (1, 'xxl-job-executor-sample', '示例执行器', 1, 0, NULL);
+INSERT INTO xxl_job_info(id, job_group, job_cron, job_desc, add_time, update_time, author, alarm_email, executor_route_strategy, executor_handler, executor_param, executor_block_strategy, executor_timeout, executor_fail_retry_count, glue_type, glue_source, glue_remark, glue_updatetime, child_jobid) VALUES (1, 1, '0 0 0 * * ? *', '测试任务1', to_date('20181103222131','yyyymmddhh24miss'), to_date('20181103222131','yyyymmddhh24miss'), 'XXL', '', 'FIRST', 'demoJobHandler', '', 'SERIAL_EXECUTION', 0, 0, 'BEAN', '', 'GLUE代码初始化', to_date('20181103222131','yyyymmddhh24miss'), '');
+INSERT INTO xxl_job_user(id, username, password, role, permission) VALUES (1, 'admin', 'e10adc3949ba59abbe56e057f20f883e', 1, NULL);
+INSERT INTO xxl_job_lock ( lock_name) VALUES ( 'schedule_lock');
 
